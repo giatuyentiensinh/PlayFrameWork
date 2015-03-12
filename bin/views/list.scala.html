@@ -1,13 +1,29 @@
 @(products: List[Product])
 @main("Products catalogue") {
+
 <div class="container">
 	<h2 class="text-primary text-center">All products</h2>
+	
+	<script>
+	   function del(urlToDelete) {
+	      $.ajax({
+	        url: urlToDelete,
+	        type: 'DELETE',
+	        success: function(results) {
+	          // Refresh the page
+	          location.reload();
+	        }
+	      });
+	   }
+	</script>
+	
 	<table class="table table-striped">
 	    <thead>
 	      <tr>
 	        <th>EAN</th>
 	        <th>Name</th>
 	        <th>Description</th>
+	        <th></th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -16,9 +32,11 @@
 	        <td><a class="text-warning" href="@routes.Products.details(product.ean)">@product.ean</a></td>
 	        <td><a class="text-danger" href="@routes.Products.details(product.ean)">@product.name</a></td>
 	        <td><a class="text-success" href="@routes.Products.details(product.ean)">@product.description</a></td>
+	        <td><a onclick="del('@routes.Products.delete(product.ean)')">Delete</a></td>
 	      </tr>
 	      }
 	    </tbody>
 	</table>
+	<a href="@routes.Products.newProduct()" class="btn btn-primary">New product</a>
 </div>
 }
