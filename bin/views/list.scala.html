@@ -1,0 +1,24 @@
+@(products: List[Product])
+@main("Products catalogue") {
+<div class="container">
+	<h2 class="text-primary text-center">All products</h2>
+	<table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <th>EAN</th>
+	        <th>Name</th>
+	        <th>Description</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    @for(product <- products) {
+	      <tr>
+	        <td><a class="text-warning" href="@routes.Products.details(product.ean)">@product.ean</a></td>
+	        <td><a class="text-danger" href="@routes.Products.details(product.ean)">@product.name</a></td>
+	        <td><a class="text-success" href="@routes.Products.details(product.ean)">@product.description</a></td>
+	      </tr>
+	      }
+	    </tbody>
+	</table>
+</div>
+}
